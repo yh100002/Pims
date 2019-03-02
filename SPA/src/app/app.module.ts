@@ -15,13 +15,17 @@ import { NavComponent } from './nav/nav.component';
 import { ProductimportComponent } from './import/productimport/productimport.component';
 import { HomeComponent } from './home/home.component';
 import { AddHeaderInterceptor } from './_intercepter/addheader';
+import { ListComponent } from './list/list.component';
+import { ProductDataResolver } from './_resolvers/productdata.resolver';
+import { ProdcutDataService } from './_services/productdataservice';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       ProductimportComponent,
-      HomeComponent
+      HomeComponent,
+      ListComponent
    ],
    imports: [
       BrowserModule,
@@ -32,11 +36,10 @@ import { AddHeaderInterceptor } from './_intercepter/addheader';
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      /*
-      JwtModule.forRoot(\\\\nconfig
+      /*\nJwtModule.forRoot(\\\\\\\\nconfig
    ],
    //theauthenticationendpointdoesn’tneedtoreceiveitbecausethere’snopoint: [
-      Thetokenistypicallynullwhenit’scalledanyway.\\\\nblacklistedRoutes
+      Thetokenistypicallynullwhenit’scalledanyway.\\\\\\\\nblacklistedRoutes
    ]
 }),*/
        NgbModule,
@@ -45,8 +48,11 @@ import { AddHeaderInterceptor } from './_intercepter/addheader';
    providers: [{
       provide: HTTP_INTERCEPTORS,
       useClass: AddHeaderInterceptor,
-      multi: true,
-    }],
+      multi: true    
+    },
+    ProdcutDataService,
+    ProductDataResolver
+   ],
    bootstrap: [
       AppComponent
    ]

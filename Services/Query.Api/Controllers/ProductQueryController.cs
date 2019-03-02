@@ -3,19 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Data;
+using Events;
+using MassTransit;
+using Models;
 
 namespace Query.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ProductQueryController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        private readonly IUnitOfWork uow;
+
+        public ProductQueryController(IUnitOfWork uow)
         {
-            return new string[] { "value1", "value2" };
+            this.uow = uow;
         }
+
+         [HttpGet("productlist")]
+        public async Task<IActionResult> ProductList()
+        {
+            var repo =this.uow.GetRepositoryAsync<ProductData>();
+            var result = await repo.GetListAsync();    
+            return Ok(result);
+        }
+
+        /*
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -41,5 +55,6 @@ namespace Query.Api.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }

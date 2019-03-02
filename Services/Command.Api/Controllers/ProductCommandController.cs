@@ -25,12 +25,11 @@ namespace Command.Api.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] ProductData product)
         {
-            var repo = this.uow.GetRepositoryAsync<ProductData>();   
-            //var existed = repo.GetListAsync(s => s.ZamroID == product.ZamroID).Result.Items;
+            var repo = this.uow.GetRepositoryAsync<ProductData>();               
             var existed = repo.SingleAsync(s => s.ZamroID == product.ZamroID);
             if(existed.Result != null)
             {
-                Console.WriteLine("Updated:" + existed.Result.Name);
+                //Console.WriteLine("Updated:" + existed.Result.Name);
                 repo.UpdateAsync(existed.Result);
                 this.uow.SaveChanges();
                  await this.messageBus.Publish<ProductUpdateEvent>(new 
@@ -45,7 +44,7 @@ namespace Command.Api.Controllers
                     );
                 return Ok();               
             }
-            Console.WriteLine("Created:" + product.Name);
+            //Console.WriteLine("Created:" + product.Name);
             await repo.AddAsync(product);    
             this.uow.SaveChanges();   
 
