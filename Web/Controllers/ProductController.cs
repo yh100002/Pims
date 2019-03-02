@@ -48,10 +48,7 @@ namespace Web.Controllers
                     foreach(var row in csvResults)
                     {
                         var response = await this.apiClient.PostAsync(this.pimsSettings.Value.ProductCommandApiUrl + "/api/productcommand/create", row);
-                    }                  
-                    
-                    //FileInfo savedFile = new FileInfo(savePath); 
-                    //savedFile.Delete();
+                    }
 
                     return Ok("Uploaded");
                 }

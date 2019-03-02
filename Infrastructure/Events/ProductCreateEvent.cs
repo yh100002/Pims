@@ -11,9 +11,9 @@ namespace Events
         public string UnitOfMeasure { get; set; }   
         public int CategoryID { get; set; }   
         public double PurchasePrice { get; set; }
-        public int Available { get; set; }   
+        public byte Available { get; set; }   
         public ProductCreateEvent(string ZamroID, string Name, string Description, int MinOrderQuantity, 
-        string UnitOfMeasure, int CategoryID, double PurchasePrice, int Available)
+        string UnitOfMeasure, int CategoryID, double PurchasePrice, byte Available)
         {
             this.ZamroID = ZamroID;
             this.Name = Name;

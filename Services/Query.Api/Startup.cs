@@ -48,6 +48,7 @@ namespace Query.Api
 
             // register a specific consumer
             builder.RegisterType<ProductCreateEventConsumer>();
+            builder.RegisterType<ProductUpdateEventConsumer>();
 
             builder.Register(context =>
                 {

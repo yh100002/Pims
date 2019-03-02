@@ -13,6 +13,6 @@ namespace Models
         public string UnitOfMeasure { get; set; }   
         public int CategoryID { get; set; }   
         public double PurchasePrice { get; set; }
-        public int Available { get; set; }   
+        public byte Available { get; set; }   
     }
 }
