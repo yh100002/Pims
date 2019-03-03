@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductData } from '../_models/productdata';
 import { ServerDataSource, LocalDataSource } from 'ng2-smart-table';
 import {ExcelService} from '../_services/excelservice';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-list',
@@ -60,12 +61,13 @@ export class ListComponent implements OnInit {
     },
   };
 
-  constructor(private productDataService: ProdcutDataService, private activatedRoute: ActivatedRoute, private excelService:ExcelService) 
+  constructor(private productDataService: ProdcutDataService, private activatedRoute: ActivatedRoute, private excelService:ExcelService, private alertify: AlertifyService) 
   {   
   }
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {      
       this.productDatas = data['productdatalist'];      
+      console.log(data['productdatalist']);
     });
   }
 
@@ -78,8 +80,8 @@ export class ListComponent implements OnInit {
             (data) =>{            
             this.productDatas = data;
             }),
-            err => {
-            console.log("Error occured while deleting the data.");
+            error => {
+              this.alertify.error(error);
     }                                                                   
     
   } 

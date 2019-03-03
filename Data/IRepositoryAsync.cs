@@ -22,7 +22,7 @@ namespace Data
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
             int index = 0,
-            int size = 20,
+            int size = 200,
             bool disableTracking = true,
             CancellationToken cancellationToken = default(CancellationToken));
 

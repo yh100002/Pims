@@ -19,8 +19,7 @@ namespace WebCommon.Csv
                     try
                     {
                         var record = csv.GetRecord<ProductData>();
-                        list.Add(record);
-                        //Console.WriteLine(record.Name);
+                        list.Add(record);                        
                     }
                     catch(Exception)
                     {                        

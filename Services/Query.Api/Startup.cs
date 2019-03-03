@@ -60,8 +60,7 @@ namespace Query.Api
                             h.Username("rabbitmq");
                             h.Password("rabbitmq");
                         });
-
-                        // https://stackoverflow.com/questions/39573721/disable-round-robin-pattern-and-use-fanout-on-masstransit
+                        
                         cfg.ReceiveEndpoint(host, "YoungQueue" + Guid.NewGuid().ToString(), e =>
                         {
                             e.LoadFrom(context);
@@ -83,17 +82,7 @@ namespace Query.Api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime lifetime)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
+        {            
             app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseMvc();

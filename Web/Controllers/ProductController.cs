@@ -82,15 +82,13 @@ namespace Web.Controllers
         
         [HttpDelete("{id}")]
         public async Task Delete(string id)
-        {
-            Console.WriteLine("Deleted====>" + id);
+        {           
             await this.apiClient.PostAsync(this.pimsSettings.Value.ProductCommandApiUrl + "/api/productcommand/delete", id);
         }
 
         [HttpPut("update")]
         public async Task Put([FromBody] ProductData product)
-        {
-            Console.WriteLine("Put====>" + product.Name);
+        {            
             //Create or Update
             await this.apiClient.PostAsync(this.pimsSettings.Value.ProductCommandApiUrl + "/api/productcommand/create", product);
         }

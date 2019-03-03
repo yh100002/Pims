@@ -4,6 +4,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ProductData } from '../_models/productData';
 import { PaginatedResult } from '../_models/pagination';
+import { AlertifyService } from './alertify.service';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { PaginatedResult } from '../_models/pagination';
   export class ProdcutDataService {
   baseUrl = environment.apiUrl + 'product/';
   
-  constructor(private http: HttpClient) {}  
+  constructor(private http: HttpClient, private alertify: AlertifyService) {}  
  
   
   getProductDataList(): Observable<ProductData[]> {
@@ -25,9 +26,9 @@ import { PaginatedResult } from '../_models/pagination';
       res => { console.log(res);  },
     (err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
-        console.log("Client-side error occured.");
+        this.alertify.error(err.message);
       } else {
-        console.log("Server-side error occured.");
+        this.alertify.error(err.message);
       }
     });
   }
@@ -39,9 +40,9 @@ import { PaginatedResult } from '../_models/pagination';
       res => { console.log(res);  },
     (err: HttpErrorResponse) => {
       if (err.error instanceof Error) {
-        console.log("Client-side error occured.");
+        this.alertify.error(err.message);
       } else {
-        console.log("Server-side error occured.");
+        this.alertify.error(err.message);
       }
     });
   }

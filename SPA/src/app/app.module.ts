@@ -10,7 +10,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
-
+import { AlertifyService } from './_services/alertify.service';
 import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -18,10 +18,9 @@ import { ProductimportComponent } from './import/productimport/productimport.com
 import { HomeComponent } from './home/home.component';
 import { AddHeaderInterceptor } from './_intercepter/addheader';
 import { ListComponent } from './list/list.component';
-import { ProductcardComponent } from './list/productcard/productcard.component';
 import { ProductDataResolver } from './_resolvers/productdata.resolver';
 import { ProdcutDataService } from './_services/productdataservice';
-import {ExcelService} from './_services/excelservice';
+import { ExcelService } from './_services/excelservice';
 
 @NgModule({
    declarations: [
@@ -29,8 +28,7 @@ import {ExcelService} from './_services/excelservice';
       NavComponent,
       ProductimportComponent,
       HomeComponent,
-      ListComponent,
-      ProductcardComponent      
+      ListComponent      
    ],
    imports: [
       BrowserModule,
@@ -52,7 +50,8 @@ import {ExcelService} from './_services/excelservice';
     },
     ProdcutDataService,
     ProductDataResolver,
-    ExcelService
+    ExcelService,
+    AlertifyService
    ],
    bootstrap: [
       AppComponent
