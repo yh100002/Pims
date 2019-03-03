@@ -16,6 +16,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using Serilog;
+using Serilog.Exceptions;
+using Serilog.Sinks.Elasticsearch;
+
 using WebCommon.Upload;
 using WebCommon.Csv;
 using Http;
@@ -35,8 +40,15 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider  ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling = 
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });      
+
             services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-gateway-version"));
+            services.AddAutoMapper();
+
             var builder = new ContainerBuilder();
             builder.RegisterInstance<IHttpClient>(new StandardHttpClient());
 

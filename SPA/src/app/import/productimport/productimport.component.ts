@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpEventType, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-productimport',
@@ -7,6 +8,7 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
   styleUrls: ['./productimport.component.css']
 })
 export class ProductimportComponent implements OnInit {
+  baseUrl = environment.apiUrl + 'product/upload';
   public progress: number;
   public message: string;
   @Output() public onUploadFinished = new EventEmitter();
@@ -25,7 +27,7 @@ export class ProductimportComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
  
-    this.http.post('https://localhost:5001/api/product/upload', formData, {reportProgress: true, observe: 'events'})
+    this.http.post(this.baseUrl, formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

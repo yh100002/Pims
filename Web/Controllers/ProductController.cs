@@ -10,7 +10,13 @@ using Web.Configuration;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using WebCommon.Upload;
 using WebCommon.Csv;
+using Models;
 using Http;
+using Web.Dto;
+using AutoMapper;
+using Newtonsoft.Json;
+using Data;
+using Data.Paging;
 
 namespace Web.Controllers
 {   
@@ -24,13 +30,16 @@ namespace Web.Controllers
         private readonly IUploader uploader;
         private readonly ICsvParse csvParse;
         private readonly IHttpClient apiClient;
+        private readonly IMapper mapper;
 
-        public ProductController(IOptions<PimsSettings> pimsSettings, IUploader uploader, ICsvParse csvParse, IHttpClient apiClient)
+
+        public ProductController(IOptions<PimsSettings> pimsSettings, IUploader uploader, ICsvParse csvParse, IHttpClient apiClient, IMapper mapper)
         {
             this.pimsSettings = pimsSettings;    
             this.uploader = uploader;  
             this.csvParse = csvParse; 
-            this.apiClient = apiClient;     
+            this.apiClient = apiClient;    
+            this.mapper = mapper; 
         }
 
 
@@ -47,6 +56,7 @@ namespace Web.Controllers
                     var csvResults = this.csvParse.Parse(savePath);
                     foreach(var row in csvResults)
                     {
+                        //Create or Update
                         var response = await this.apiClient.PostAsync(this.pimsSettings.Value.ProductCommandApiUrl + "/api/productcommand/create", row);
                     }
 
@@ -62,36 +72,27 @@ namespace Web.Controllers
             }
         }
 
-
-        /*
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        
+        [HttpGet("GetProducts")]
+        public async Task<IActionResult> GetProducts()
         {
-            return new string[] { "value1", "value2" };
+            var response = await this.apiClient.GetStringAsync(this.pimsSettings.Value.ProductQueryApiUrl + "/api/productquery/productlist");
+            return Ok(response);
         }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
-       
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
+        
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(string id)
         {
+            Console.WriteLine("Deleted====>" + id);
+            await this.apiClient.PostAsync(this.pimsSettings.Value.ProductCommandApiUrl + "/api/productcommand/delete", id);
         }
-        */
 
+        [HttpPut("update")]
+        public async Task Put([FromBody] ProductData product)
+        {
+            Console.WriteLine("Put====>" + product.Name);
+            //Create or Update
+            await this.apiClient.PostAsync(this.pimsSettings.Value.ProductCommandApiUrl + "/api/productcommand/create", product);
+        }
     }
 }

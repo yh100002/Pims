@@ -8,6 +8,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
@@ -16,8 +18,10 @@ import { ProductimportComponent } from './import/productimport/productimport.com
 import { HomeComponent } from './home/home.component';
 import { AddHeaderInterceptor } from './_intercepter/addheader';
 import { ListComponent } from './list/list.component';
+import { ProductcardComponent } from './list/productcard/productcard.component';
 import { ProductDataResolver } from './_resolvers/productdata.resolver';
 import { ProdcutDataService } from './_services/productdataservice';
+import {ExcelService} from './_services/excelservice';
 
 @NgModule({
    declarations: [
@@ -25,7 +29,8 @@ import { ProdcutDataService } from './_services/productdataservice';
       NavComponent,
       ProductimportComponent,
       HomeComponent,
-      ListComponent
+      ListComponent,
+      ProductcardComponent      
    ],
    imports: [
       BrowserModule,
@@ -36,14 +41,9 @@ import { ProdcutDataService } from './_services/productdataservice';
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      /*\nJwtModule.forRoot(\\\\\\\\nconfig
-   ],
-   //theauthenticationendpointdoesn’tneedtoreceiveitbecausethere’snopoint: [
-      Thetokenistypicallynullwhenit’scalledanyway.\\\\\\\\nblacklistedRoutes
-   ]
-}),*/
-       NgbModule,
-       NgxJsonViewerModule
+      Ng2SmartTableModule,    
+      NgbModule,
+      NgxJsonViewerModule      
    ],
    providers: [{
       provide: HTTP_INTERCEPTORS,
@@ -51,7 +51,8 @@ import { ProdcutDataService } from './_services/productdataservice';
       multi: true    
     },
     ProdcutDataService,
-    ProductDataResolver
+    ProductDataResolver,
+    ExcelService
    ],
    bootstrap: [
       AppComponent

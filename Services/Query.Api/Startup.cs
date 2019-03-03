@@ -49,6 +49,7 @@ namespace Query.Api
             // register a specific consumer
             builder.RegisterType<ProductCreateEventConsumer>();
             builder.RegisterType<ProductUpdateEventConsumer>();
+            builder.RegisterType<ProductDeleteEventConsumer>();
 
             builder.Register(context =>
                 {
@@ -64,7 +65,7 @@ namespace Query.Api
                         cfg.ReceiveEndpoint(host, "YoungQueue" + Guid.NewGuid().ToString(), e =>
                         {
                             e.LoadFrom(context);
-                            //e.Consumer<ApplicantAppliedConsumer>();
+                            
                         });
                     });
 

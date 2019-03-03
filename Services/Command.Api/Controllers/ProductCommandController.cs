@@ -61,6 +61,16 @@ namespace Command.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody] string zamroID)
+        {            
+            var repo = this.uow.GetRepository<ProductData>();
+            repo.Delete(zamroID);   
+            this.uow.SaveChanges();
+            await this.messageBus.Publish<ProductDeleteEvent>(new { zamroID } );
+            return Ok("delete");
+        }
 /*
         // PUT api/values/5
         [HttpPut("{id}")]

@@ -4,5 +4,6 @@ namespace Web.Configuration
     {
         public string UploadFolder { get; set; }      
         public string ProductCommandApiUrl { get; set; }         
+        public string ProductQueryApiUrl { get; set; }        
     }
 }

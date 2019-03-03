@@ -1,5 +1,6 @@
-<div class="row">
-    <div *ngFor="let product of productDatas" class="col-lg-2">
-      {{ product.name }}
-    </div>
-  </div>
+
+<button type="button" class="btn btn-primary" (click)="exportToExcel()" >Export to Excel file</button>
+<ng2-smart-table [settings]="settings" [source]="productDatas.items" 
+(deleteConfirm)="deleteRecord($event)" 
+(editConfirm)="editRecord($event)"
+(rowSelect)="onRowSelect($event)"></ng2-smart-table>
