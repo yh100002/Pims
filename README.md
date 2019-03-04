@@ -3,12 +3,13 @@
 - Import Product Data
 - Export Seclected Product Data To Excel File
 - CQRS Architectural Pattern With RabbitMQ
+- API Versioning for api gateway
 - Docker Deploy 
 - Pagination
 
 ### Applied Architect (CQRS)
 ![Image of CQRS](https://www.codeproject.com/KB/architecture/555855/CQRS.jpg)
-
+* Images from codeproject
 
 ### Technical Points
 
@@ -59,7 +60,6 @@
 - How To Run
 > - Make sure the docker service running on your machine 
 > - After above, Run the docker image that is in the root in branch following steps
->> - docker network create esnetwork --driver=bridge
 >> - docker-compose up 'on the same folder of branch root'
 >> - ms sql server and rabbimq and db deployment will be downloaded and run.
 > - After running Docker image, you can run 'dotnet run' for each microservices.
