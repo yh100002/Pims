@@ -1,4 +1,6 @@
-﻿ 
+﻿
+
+using System;
 
 namespace Events
 {
@@ -11,7 +13,8 @@ namespace Events
         public string UnitOfMeasure { get; set; }   
         public int CategoryID { get; set; }   
         public double PurchasePrice { get; set; }
-        public byte Available { get; set; }   
+        public byte Available { get; set; }          
+   
         public ProductCreateEvent(string ZamroID, string Name, string Description, int MinOrderQuantity, 
         string UnitOfMeasure, int CategoryID, double PurchasePrice, byte Available)
         {
@@ -22,7 +25,7 @@ namespace Events
             this.UnitOfMeasure = UnitOfMeasure;
             this.CategoryID = CategoryID;
             this.PurchasePrice = PurchasePrice;
-            this.Available = Available;
+            this.Available = Available;            
         }
     }
 }

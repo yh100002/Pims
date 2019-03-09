@@ -5,7 +5,7 @@ services:
   sql.data:
     image: mssql-linux
     build:
-      context: ./Database
+      context: ./DataBaseDeploy
       dockerfile: Dockerfile
     ports:
       - "5433:1433"

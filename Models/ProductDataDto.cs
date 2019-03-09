@@ -1,11 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace Models
 {
-    public class ProductData
+    public class ProductDataDto
     {
-        [Key]
         public string ZamroID { get; set; }
         public string Name { get; set; }      
         public string Description { get; set; }   
@@ -14,6 +10,6 @@ namespace Models
         public int CategoryID { get; set; }   
         public double PurchasePrice { get; set; }
         public byte Available { get; set; }   
-        public DateTime Timestamp { get; set; } 
+        
     }
 }
