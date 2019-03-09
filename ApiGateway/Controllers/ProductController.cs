@@ -28,19 +28,12 @@ namespace ApiGateway.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IOptions<PimsSettings> pimsSettings;    
-        private readonly IUploader uploader;
-        private readonly ICsvParse csvParse;
         private readonly IHttpClient apiClient;
-        private readonly IMapper mapper;
 
-
-        public ProductController(IOptions<PimsSettings> pimsSettings, IUploader uploader, ICsvParse csvParse, IHttpClient apiClient, IMapper mapper)
+        public ProductController(IOptions<PimsSettings> pimsSettings, IHttpClient apiClient)
         {
-            this.pimsSettings = pimsSettings;    
-            this.uploader = uploader;  
-            this.csvParse = csvParse; 
-            this.apiClient = apiClient;    
-            this.mapper = mapper; 
+            this.pimsSettings = pimsSettings;               
+            this.apiClient = apiClient;
         }       
 
         
