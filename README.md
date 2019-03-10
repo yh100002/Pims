@@ -92,16 +92,14 @@
 >> - docker-compose up 'on the same folder of branch root'
 >> - ms sql server and rabbimq and db deployment will be downloaded and run.
 > - After running Docker image, you can run 'dotnet run' for each microservices.
->> - Run 'Web' which is a kind of API gateway
->> - Run 'Command.Api' and 'Query.Api'
->> - Run 'SPA' (run 'ng serve' and open 'http://localhost:4200')
+>> - ApiGateway : https://localhost:5001 (by using dotnet run)
+>> - ProductWriter.Api : https://localhost:5002 (by using dotnet run)
+>> - ProductReader.Api : https://localhost:5003 (by using dotnet run)
+>> - Run 'PimFront-End' (run 'ng serve' and open 'http://localhost:4200')
 > - Thats it!
 
 - How To Use
 > You have run three services as backends.
-> - ApiGateway : https://localhost:5001 (by using dotnet run)
-> - ProductWriter.Api : https://localhost:5002 (by using dotnet run)
-> - ProductReader.Api : https://localhost:5003 (by using dotnet run)
 > - PimFront-End: http://localhost:4200 (by using ng serve)
 > - RabbitMQ Management : http://localhost:15672
 >> Above all, you have import product data and of course it will take long time so after triggering import data, you go to Product List page and see the data list.
