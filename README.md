@@ -100,9 +100,9 @@
 - How To Use
 > You have run three services as backends.
 > - ApiGateway : https://localhost:5001 (by using dotnet run)
-> - ProductWriter.Api : https://localhost:5002(by using dotnet run)
-> - ProductReader.Api : https://localhost:5003(by using dotnet run)
-> - PimFront-End: http://localhost:4200(by using ng serve)
+> - ProductWriter.Api : https://localhost:5002 (by using dotnet run)
+> - ProductReader.Api : https://localhost:5003 (by using dotnet run)
+> - PimFront-End: http://localhost:4200 (by using ng serve)
 > - RabbitMQ Management : http://localhost:15672
 >> Above all, you have import product data and of course it will take long time so after triggering import data, you go to Product List page and see the data list.
 
